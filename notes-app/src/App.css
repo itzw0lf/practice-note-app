@@ -1,0 +1,325 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Unbounded:wght@300;700&display=swap');
+
+:root {
+  --bg: #050507;
+  --surface: #0c0c10;
+  --surface-2: #13131a;
+  --ink: #e2e0f0;
+  --ink-muted: #3d3b55;
+  --ink-dim: #222230;
+  --accent: #00ff9d;
+  --accent-dim: rgba(0, 255, 157, 0.08);
+  --accent-glow: rgba(0, 255, 157, 0.15);
+  --danger: #ff3864;
+  --danger-glow: rgba(255, 56, 100, 0.12);
+  --border: #141420;
+  --border-lit: #2a2a40;
+  --radius: 2px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgba(0, 255, 157, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 157, 0.015) 1px, transparent 1px);
+  background-size: 40px 40px;
+  min-height: 100vh;
+  font-family: 'Space Mono', monospace;
+  color: var(--ink);
+}
+
+#root {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  min-height: 100vh;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 32px;
+  gap: 48px;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 52px 0;
+  border-right: 1px solid var(--border-lit);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  gap: 16px;
+}
+
+h1 {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: var(--accent);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  text-transform: uppercase;
+  line-height: 1;
+  user-select: none;
+}
+
+h1 em {
+  font-style: normal;
+  color: var(--ink-muted);
+  font-weight: 300;
+}
+
+.sidebar-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent), 0 0 16px var(--accent-glow);
+  animation: blink 1.2s step-end infinite;
+  margin-top: 8px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ── Main ── */
+.main {
+  padding: 52px 0 80px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Label style ── */
+.main::before {
+  content: '> NOTES_DB.init()';
+  display: block;
+  font-size: 0.65rem;
+  color: var(--ink-muted);
+  letter-spacing: 0.08em;
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ── Inputs ── */
+input {
+  width: 100%;
+  padding: 12px 14px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--border-lit);
+  border-radius: var(--radius);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  letter-spacing: 0.04em;
+}
+
+input::placeholder {
+  color: var(--ink-muted);
+}
+
+input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-glow), inset 0 0 20px var(--accent-dim);
+}
+
+/* Search */
+.search-wrapper {
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.search-wrapper::before {
+  content: '//';
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ink-muted);
+  font-size: 0.7rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.search-wrapper input {
+  padding-left: 34px;
+  background: transparent;
+  border-color: var(--border);
+  color: var(--ink-muted);
+  font-size: 0.72rem;
+}
+
+.search-wrapper input:focus {
+  color: var(--ink);
+  border-color: var(--accent);
+}
+
+/* Add row */
+.add-wrapper {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.add-wrapper::before {
+  content: '>';
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--accent);
+  font-size: 0.78rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.add-wrapper input {
+  flex: 1;
+  padding-left: 28px;
+  border-color: var(--border-lit);
+}
+
+/* Buttons */
+button {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  border-radius: var(--radius);
+  transition: all 0.12s;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+.add-wrapper button {
+  padding: 12px 20px;
+  background: var(--accent);
+  color: #050507;
+  font-size: 0.7rem;
+  white-space: nowrap;
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+
+.add-wrapper button:hover {
+  box-shadow: 0 0 28px rgba(0, 255, 157, 0.3);
+  background: #1fffa8;
+}
+
+/* ── Notes list ── */
+.notes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* ── Note card ── */
+.note-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border-lit);
+  border-left: 3px solid transparent;
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  cursor: grab;
+  animation: appear 0.18s ease;
+  transition: border-color 0.15s, background 0.15s, transform 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+
+.note-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--accent-dim), transparent);
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+
+.note-card:hover {
+  border-left-color: var(--accent);
+  background: var(--surface-2);
+}
+
+.note-card:hover::before {
+  opacity: 1;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateX(-6px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Note text */
+.note-card p {
+  font-size: 0.8rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--ink);
+  flex: 1;
+  letter-spacing: 0.02em;
+}
+
+/* Delete button */
+.note-card button {
+  padding: 4px 10px;
+  background: transparent;
+  color: var(--ink-muted);
+  font-size: 0.62rem;
+  border: 1px solid var(--border-lit);
+  border-radius: var(--radius);
+  flex-shrink: 0;
+  transition: all 0.12s;
+}
+
+.note-card button:hover {
+  color: var(--danger);
+  border-color: var(--danger);
+  background: var(--danger-glow);
+  box-shadow: 0 0 10px var(--danger-glow);
+}
+
+/* ── Dragging state ── */
+.note-card.dragging {
+  opacity: 0.2;
+  border-left-color: var(--accent);
+  box-shadow: 0 0 16px var(--accent-glow);
+  transform: scaleY(0.92);
+  cursor: grabbing;
+}
+
+/* ── Empty state ── */
+.empty-state {
+  text-align: left;
+  padding: 40px 0;
+  color: var(--ink-muted);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+}
+
+.empty-state::before {
+  content: '// ';
+  color: var(--ink-dim);
+}
