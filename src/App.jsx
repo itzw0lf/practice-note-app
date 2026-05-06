@@ -37,15 +37,19 @@ export default function Notes() {
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
-                setAddNotes([...addNotes, inputValue]);
-                setInputValue("");
+                if (inputValue.trim() !== "") {
+                  setAddNotes([...addNotes, inputValue]);
+                  setInputValue("");
+                }
               }
             }}
           />
           <button
             onClick={() => {
-              setAddNotes([...addNotes, inputValue]);
-              setInputValue("");
+              if (inputValue.trim() !== "") {
+                setAddNotes([...addNotes, inputValue]);
+                setInputValue("");
+              }
             }}
           >
             Add
