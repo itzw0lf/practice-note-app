@@ -5,9 +5,10 @@ export default function Notes() {
   const [addNotes, setAddNotes] = useState(
     JSON.parse(localStorage.getItem("notes")) || [],
   );
-  const [inputValue, setInputValue] = useState("");
+  const [titleValue, setTitleValue] = useState("");
   const [searchValue, setSearchValue] = useState("");
   const [dragIndex, setDragIndex] = useState(null);
+  const [openIndex, setOpenIndex] = useState(null);
 
   useEffect(() => {
     localStorage.setItem("notes", JSON.stringify(addNotes));
@@ -33,22 +34,34 @@ export default function Notes() {
         <div className="add-wrapper">
           <input
             placeholder="Type Your Notes"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
+            value={titleValue}
+            onChange={(e) => setTitleValue(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
-                if (inputValue.trim() !== "") {
-                  setAddNotes([...addNotes, inputValue]);
-                  setInputValue("");
+                if (titleValue.trim() !== "") {
+                  setAddNotes([
+                    ...addNotes,
+                    {
+                      title: titleValue.split(" ").slice(0, 2).join(" "),
+                      content: titleValue,
+                    },
+                  ]);
+                  setTitleValue("");
                 }
               }
             }}
           />
           <button
             onClick={() => {
-              if (inputValue.trim() !== "") {
-                setAddNotes([...addNotes, inputValue]);
-                setInputValue("");
+              if (titleValue.trim() !== "") {
+                setAddNotes([
+                  ...addNotes,
+                  {
+                    title: titleValue.split(" ").slice(0, 2).join(" "),
+                    content: titleValue,
+                  },
+                ]);
+                setTitleValue("");
               }
             }}
           >
@@ -58,14 +71,19 @@ export default function Notes() {
 
         <div className="notes-list">
           {addNotes
-            .filter((note) => note.includes(searchValue))
+            .filter((note) => note.title.includes(searchValue))
             .map((note, index) => (
               <div
                 className={
-                  dragIndex === index ? "note-card dragging" : "note-card"
+                  dragIndex === index ? "note-card dragging" : openIndex === index ? "note-card open" : "note-card"
                 }
                 key={index}
                 draggable={true}
+                onClick={() => {
+                  if (note.title !== note.content) {
+                    setOpenIndex(openIndex === index ? null : index);
+                  }
+                }}
                 onDragStart={() => {
                   setDragIndex(index);
                 }}
@@ -83,7 +101,8 @@ export default function Notes() {
                 }}
                 onDragEnd={() => setDragIndex(null)}
               >
-                <p>{note}</p>
+                <p>{note.title}</p>
+                {openIndex === index && <p>{note.content}</p>}
                 <button
                   onClick={() => {
                     setAddNotes(addNotes.filter((note, i) => i !== index));
