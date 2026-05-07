@@ -1,25 +1,37 @@
-@import url('https://fonts.googleapis.com/css2?family=Anybody:wght@300;700&family=Geist+Mono:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@300;400&display=swap');
 
 :root {
-  --bg: #09080f;
-  --surface: #100e1a;
-  --surface-2: #171524;
-  --surface-3: #1e1b2e;
-  --ink: #cdc8e8;
-  --ink-muted: #4a4568;
-  --ink-dim: #221f35;
-  --purple-1: #7b5ea7;
-  --purple-2: #9b7fd4;
-  --purple-3: #c4aaff;
-  --accent: #a076f9;
-  --accent-glow: rgba(160, 118, 249, 0.18);
-  --accent-soft: rgba(160, 118, 249, 0.08);
-  --danger: #e05c7a;
-  --danger-glow: rgba(224, 92, 122, 0.12);
-  --border: #1c1929;
-  --border-2: #2a2640;
-  --radius: 10px;
-  --radius-sm: 6px;
+  --bg: #f4f1eb;
+  --surface: #faf8f3;
+  --surface-2: #f0ece0;
+  --surface-3: #e8e2d0;
+  --ink: #2c2a20;
+  --ink-muted: #7a7560;
+  --ink-dim: #c8c2a8;
+  --green-1: #3d6b4f;
+  --green-2: #5a8f6a;
+  --green-3: #8aba8f;
+  --green-light: #e8f3e8;
+  --green-glow: rgba(90, 143, 106, 0.15);
+  --moss: #4a5e3a;
+  --sage: #a3b899;
+  --earth: #8b6f47;
+  --earth-light: #f5ede0;
+  --earth-glow: rgba(139, 111, 71, 0.15);
+  --clay: #c17f52;
+  --sky: #7bafc4;
+  --sky-light: #e8f4f8;
+  --danger: #c0392b;
+  --danger-light: #fdecea;
+  --save: #3d6b4f;
+  --save-light: #e8f3e8;
+  --border: #e0d8c4;
+  --border-2: #cfc7ae;
+  --shadow: 0 4px 16px rgba(44, 42, 32, 0.08);
+  --shadow-hover: 0 8px 28px rgba(44, 42, 32, 0.14);
+  --radius: 18px;
+  --radius-sm: 10px;
+  --radius-pill: 999px;
 }
 
 *, *::before, *::after {
@@ -31,10 +43,11 @@
 body {
   background-color: var(--bg);
   background-image:
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(123, 94, 167, 0.2) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 40% at 90% 90%, rgba(160, 118, 249, 0.06) 0%, transparent 50%);
+    radial-gradient(ellipse 60% 40% at 0% 0%, rgba(90, 143, 106, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 100% 100%, rgba(139, 111, 71, 0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 30% 30% at 80% 10%, rgba(123, 175, 196, 0.06) 0%, transparent 50%);
   min-height: 100vh;
-  font-family: 'Geist Mono', monospace;
+  font-family: 'Outfit', sans-serif;
   color: var(--ink);
   display: flex;
   align-items: flex-start;
@@ -45,10 +58,10 @@ body {
   display: grid;
   grid-template-columns: 72px 1fr;
   width: 100%;
-  max-width: 740px;
+  max-width: 720px;
   min-height: 100vh;
   padding: 0 20px;
-  gap: 32px;
+  gap: 28px;
 }
 
 /* ── Sidebar ── */
@@ -56,17 +69,17 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 52px 0 40px;
-  border-right: 1px solid var(--border-2);
+  padding: 48px 0 40px;
+  border-right: 2px solid var(--border);
   position: sticky;
   top: 0;
   height: 100vh;
-  gap: 20px;
+  gap: 16px;
 }
 
 h1 {
-  font-family: 'Anybody', sans-serif;
-  font-size: 0.55rem;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.58rem;
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -74,7 +87,7 @@ h1 {
   transform: rotate(180deg);
   line-height: 1;
   user-select: none;
-  background: linear-gradient(180deg, var(--purple-3), var(--purple-1));
+  background: linear-gradient(180deg, var(--green-1), var(--earth));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -82,26 +95,27 @@ h1 {
 
 h1 em {
   font-style: normal;
-  opacity: 0.5;
+  opacity: 0.45;
 }
 
 .sidebar-dot {
-  width: 5px;
-  height: 5px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 8px var(--accent), 0 0 20px var(--accent-glow);
-  animation: throb 2s ease-in-out infinite;
+  background: var(--green-2);
+  box-shadow: 0 0 8px var(--green-glow);
+  animation: breathe 3s ease-in-out infinite;
+  margin-top: 8px;
 }
 
-@keyframes throb {
+@keyframes breathe {
   0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(0.6); opacity: 0.3; }
+  50% { transform: scale(0.6); opacity: 0.4; }
 }
 
 /* ── Main ── */
 .main {
-  padding: 52px 0 80px;
+  padding: 48px 0 80px;
   display: flex;
   flex-direction: column;
 }
@@ -109,99 +123,105 @@ h1 em {
 /* ── Inputs ── */
 input {
   width: 100%;
-  padding: 13px 16px;
-  font-family: 'Geist Mono', monospace;
-  font-size: 0.8rem;
-  font-weight: 300;
+  padding: 12px 16px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 400;
   color: var(--ink);
   background: var(--surface);
-  border: 1px solid var(--border-2);
+  border: 2px solid var(--border);
   border-radius: var(--radius-sm);
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
-  letter-spacing: 0.03em;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 input::placeholder {
-  color: var(--ink-muted);
+  color: var(--ink-dim);
 }
 
 input:focus {
-  border-color: var(--accent);
-  background: var(--surface-2);
-  box-shadow: 0 0 0 3px var(--accent-glow);
+  border-color: var(--green-2);
+  box-shadow: 0 0 0 4px var(--green-light);
 }
 
 /* Search */
 .search-wrapper {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.search-wrapper::before {
+  content: '🌿';
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.75rem;
+  pointer-events: none;
 }
 
 .search-wrapper input {
-  background: transparent;
+  background: var(--surface);
   border-color: var(--border);
-  font-size: 0.75rem;
+  padding-left: 36px;
+  font-size: 0.82rem;
   color: var(--ink-muted);
-  border-radius: var(--radius-sm);
-}
-
-.search-wrapper input::placeholder {
-  color: var(--ink-dim);
 }
 
 .search-wrapper input:focus {
   color: var(--ink);
-  background: var(--surface);
+  border-color: var(--green-2);
+  box-shadow: 0 0 0 4px var(--green-light);
 }
 
 /* Add row */
 .add-wrapper {
   display: flex;
   gap: 8px;
-  margin-bottom: 40px;
+  margin-bottom: 28px;
 }
 
 .add-wrapper input {
   flex: 1;
-  border-color: var(--border-2);
 }
 
-/* Buttons */
+/* ── Buttons ── */
 button {
-  font-family: 'Geist Mono', monospace;
-  font-weight: 500;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
   cursor: pointer;
   border: none;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-pill);
   transition: all 0.15s;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
+  font-size: 0.62rem;
 }
 
 button:active {
-  transform: scale(0.95);
+  transform: scale(0.93);
 }
 
+/* Add button */
 .add-wrapper button {
-  padding: 13px 22px;
-  background: var(--accent);
-  color: #09080f;
-  font-size: 0.72rem;
-  font-weight: 700;
+  padding: 12px 22px;
+  background: linear-gradient(135deg, var(--green-1), var(--moss));
+  color: #faf8f3;
+  font-size: 0.75rem;
   white-space: nowrap;
-  box-shadow: 0 0 20px var(--accent-glow), 0 4px 12px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 14px var(--green-glow);
 }
 
 .add-wrapper button:hover {
-  background: var(--purple-3);
-  box-shadow: 0 0 32px rgba(160, 118, 249, 0.35), 0 4px 16px rgba(0,0,0,0.4);
+  box-shadow: 0 6px 22px var(--green-glow);
+  transform: translateY(-2px);
 }
 
 /* ── Notes list ── */
 .notes-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 /* ── Note card ── */
@@ -209,135 +229,146 @@ button:active {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
+  gap: 10px;
   background: var(--surface);
-  border: 1px solid var(--border-2);
+  border: 2px solid var(--border);
   border-radius: var(--radius);
-  padding: 16px 18px;
+  padding: 14px 18px;
   cursor: grab;
   animation: popIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s, transform 0.15s;
-  position: relative;
-  overflow: hidden;
-}
-
-.note-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  opacity: 0;
-  transition: opacity 0.2s;
+  transition: all 0.15s;
+  box-shadow: var(--shadow);
 }
 
 .note-card:hover {
-  border-color: var(--border-2);
   background: var(--surface-2);
-  box-shadow: 0 4px 24px rgba(0,0,0,0.25), 0 0 0 1px var(--accent-soft);
-  transform: translateY(-1px);
-}
-
-.note-card:hover::before {
-  opacity: 1;
+  border-color: var(--sage);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
 }
 
 @keyframes popIn {
-  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  from { opacity: 0; transform: translateY(8px) scale(0.96); }
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* ── Note card default text (title row) ── */
+/* Note title */
 .note-card p {
-  font-size: 0.82rem;
-  font-weight: 300;
-  line-height: 1.65;
+  font-size: 0.88rem;
+  font-weight: 500;
+  line-height: 1.5;
   color: var(--ink);
   flex: 1;
-  letter-spacing: 0.02em;
 }
 
-/* Delete button */
+/* ── Card buttons ── */
 .note-card button {
-  padding: 5px 12px;
+  padding: 4px 12px;
   background: transparent;
   color: var(--ink-muted);
-  font-size: 0.62rem;
-  border: 1px solid var(--border-2);
+  font-size: 0.6rem;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-pill);
   flex-shrink: 0;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.15s;
-  border-radius: var(--radius-sm);
 }
 
 .note-card button:hover {
+  transform: translateY(-1px);
+}
+
+/* Edit */
+.note-card button:first-of-type:hover {
+  color: var(--sky);
+  border-color: var(--sky);
+  background: var(--sky-light);
+}
+
+/* Delete */
+.note-card button:last-of-type:hover {
   color: var(--danger);
   border-color: var(--danger);
-  background: var(--danger-glow);
+  background: var(--danger-light);
 }
 
-/* ── Open / expanded card ── */
+/* Save */
+.note-card button.save-btn {
+  color: var(--save);
+  border-color: var(--save);
+  background: var(--save-light);
+}
+
+.note-card button.save-btn:hover {
+  box-shadow: 0 4px 12px var(--green-glow);
+}
+
+/* ── Open card ── */
 .note-card.open {
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   cursor: pointer;
-  border-color: var(--accent);
+  border-color: var(--green-2);
   background: var(--surface-2);
-  box-shadow: 0 0 32px var(--accent-glow), 0 8px 32px rgba(0,0,0,0.3);
-  gap: 0;
+  box-shadow: 0 8px 28px var(--green-glow);
+  gap: 10px;
 }
 
-.note-card.open::before {
-  opacity: 1;
-}
-
-/* Title when open — centered and styled */
 .note-card.open p:first-of-type {
-  font-family: 'Anybody', sans-serif;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-align: center;
-  color: var(--purple-3);
-  flex: none;
+  color: var(--green-1);
   width: 100%;
-  padding-bottom: 14px;
-  margin-bottom: 14px;
-  border-bottom: 1px solid var(--border-2);
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--border);
+  text-align: center;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
-/* Content when open */
 .note-card.open p:last-of-type {
-  font-size: 0.82rem;
-  font-weight: 300;
-  line-height: 1.8;
+  font-size: 0.85rem;
+  font-weight: 400;
   color: var(--ink-muted);
-  text-align: left;
-  flex: none;
+  line-height: 1.75;
   width: 100%;
-  padding-bottom: 16px;
 }
 
-/* Delete button when open — pushed to right */
-.note-card.open button {
+.note-card.open .btn-row {
+  display: flex;
+  gap: 6px;
   align-self: flex-end;
-  margin-top: 4px;
 }
 
 /* ── Dragging ── */
 .note-card.dragging {
   opacity: 0.25;
-  border-color: var(--accent);
-  box-shadow: 0 0 24px var(--accent-glow);
-  transform: scale(0.97);
+  border-color: var(--green-2);
+  box-shadow: 0 0 20px var(--green-glow);
+  transform: scale(0.96);
   cursor: grabbing;
+}
+
+/* ── Edit input inside card ── */
+.note-card input {
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 0.84rem;
+  border-color: var(--green-2);
+  border-radius: var(--radius-sm);
+  background: var(--green-light);
+  box-shadow: none;
 }
 
 /* ── Empty state ── */
 .empty-state {
   padding: 48px 0;
   color: var(--ink-dim);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  text-align: center;
 }
